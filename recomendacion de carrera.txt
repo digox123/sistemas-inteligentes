@@ -1,0 +1,42 @@
+carrera(ingenieria_sistemas) :- tiene_habilidad(matematicas), tiene_interes(tecnologia), tiene_personalidad(analitico).
+carrera(medicina) :- tiene_habilidad(biologia), tiene_interes(salud), tiene_personalidad(empatico).
+carrera(derecho) :- tiene_habilidad(argumentacion), tiene_interes(justicia), tiene_personalidad(critico).
+carrera(arquitectura) :- tiene_habilidad(creatividad), tiene_interes(disenio), tiene_personalidad(dedicado).
+carrera(psicologia) :- tiene_habilidad(empatizar), tiene_interes(salud), tiene_personalidad(extrovertido).
+carrera(administracion) :- tiene_habilidad(liderazgo), tiene_interes(negocios), tiene_personalidad(organizado).
+carrera(ingenieria_civil) :- tiene_habilidad(matematicas), tiene_interes(construccion), tiene_personalidad(metodico).
+carrera(ingenieria_industrial) :- tiene_habilidad(gestion), tiene_interes(optimizacion), tiene_personalidad(estrategico).
+carrera(economia) :- tiene_habilidad(analisis_datos), tiene_interes(finanzas), tiene_personalidad(logico).
+carrera(contabilidad) :- tiene_habilidad(numeros), tiene_interes(finanzas), tiene_personalidad(detallista).
+carrera(diseno_grafico) :- tiene_habilidad(creatividad), tiene_interes(disenio), tiene_personalidad(innovador).
+carrera(marketing) :- tiene_habilidad(comunicacion), tiene_interes(publicidad), tiene_personalidad(extrovertido).
+carrera(biologia) :- tiene_habilidad(investigacion), tiene_interes(ciencias), tiene_personalidad(curioso).
+carrera(fisica) :- tiene_habilidad(analisis), tiene_interes(ciencias_exactas), tiene_personalidad(critico).
+carrera(quimica) :- tiene_habilidad(laboratorio), tiene_interes(investigacion), tiene_personalidad(minucioso).
+carrera(educacion) :- tiene_habilidad(ensenianza), tiene_interes(docencia), tiene_personalidad(paciente).
+carrera(turismo) :- tiene_habilidad(idiomas), tiene_interes(viajes), tiene_personalidad(sociable).
+carrera(relaciones_internacionales) :- tiene_habilidad(comunicacion), tiene_interes(politica), tiene_personalidad(negociador).
+
+preguntar(Pregunta) :-
+    write(Pregunta), write(' (si/no): '),
+    read(Respuesta), nl,
+    (Respuesta == si -> assertz(hecho(Pregunta)) ; true).
+
+% Definir habilidades, intereses y personalidad a partir de las respuestas
+obtener_respuestas :-
+    preguntar('¿Te gustan las matemáticas?'),
+    preguntar('¿Te interesa la tecnología?'),
+    preguntar('¿Eres analítico?'),
+    preguntar('¿Te gusta la biología?'),
+    preguntar('¿Te interesa la salud?'),
+    preguntar('¿Eres empático?'),
+    preguntar('¿Tienes habilidades de argumentación?'),
+    preguntar('¿Te interesa la justicia?'),
+    preguntar('¿Eres crítico?').
+
+% Inferencia basada en respuestas
+iniciar :-
+    retractall(hecho(_)),
+    obtener_respuestas,
+    carrera(X),
+    write('La carrera recomendada para ti es: '), write(X), nl. 
